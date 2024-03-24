@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Neumorphism Music Player</title>
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap");
+
+		body {
+			margin: 074;
+			font-family: "Raleway", sans-serif
+		}
+
+		.container {
+			background-color:maroon;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		.player {
+			width: 300px;
+			height: 550px;
+			background-color: green;
+			user-select: none;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			border-radius: 12px;
+			box-shadow: 6px 6px 16px rgba(163, 177, 198, 0.6), -6px -6px 16px rgba(255, 255, 255, 0.5);
+		}
+
+		.player-title {
+			width: 95%;
+			text-align: center;
+			margin-bottom: 25px;
+			font-weight: 600;
+			font-size: 12px;
+			color: #a1a1a1;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin: 35px 0px;
+		}
+
+		.player-controls {
+			display: flex;
+			width: 95%;
+			justify-content: space-evenly;
+			align-items: center;
+			margin-bottom: 25px;
+		}
+
+		.player-btn {
+			cursor: pointer;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: -4px -4px 20px 0px #fff9, -6px -6px 6px 0px #fff9, 8px 8px 20px #0001, 5px 5px 6px 0px #0001;
+			color: #797d7f;
+			width: 65px;
+			height: 65px;
+			margin-top: 20px;
+		}
+
+		.player-btn:active {
+			box-shadow: inset -8px -8px 20px #fff9, inset -5px -5px 6px #fff9, inset 8px 8px 20px #cccccc, inset 5px 5px 6px #cccccc;
+		}
+
+		.player-album {
+			width: 150px;
+		}
+
+		.player img {
+			border-radius: 50%;
+			max-width: 100%;
+			box-shadow: 0px 0px 7px rgb(163, 177, 198), 0px 0px 7px rgb(163, 177, 198), -8px -8px 50px rgba(255, 255, 255, 0.8), 3px 3px 25px rgba(0, 0, 0, .1);
+		}
+
+		.rotate {
+			--webkit-animation: rotation 15s infinite linear;
+		}
+
+		@keyframes rotation {
+			from {
+				-webkit-transform: rotate(0deg);
+			}
+
+			to {
+				-webkit-transform: rotate(359deg);
+			}
+		}
+
+		.player-artist {
+			font-size: 1.2em;
+			font-weight: 500;
+			opacity: 0.5;
+			margin: 20px 0px 0px 0px;
+		}
+
+		.player-song {
+			width: 100%;
+			text-align: center;
+			font-weight: 400;
+			font-size: 1em;
+			opacity: 0.5;
+			margin: 0;
+		}
+
+		.player-level {
+			width: 80%;
+			appearance: none;
+			border: none;
+			margin-top: 40px;
+			background-color: #e0e5ec;
+			outline: none;
+		}
+
+		.player-level::-webkit-slider-runnable-track {
+			background-color: #d7dbdd;
+			height: 6px;
+			border-radius: 5px;
+		}
+
+		.player-level::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			border-radius: 100%;
+			background-color: #5c87fe;
+			height: 18px;
+			width: 18px;
+			margin-top: -6px;
+		}
+
+		.audio-duration {
+			margin-top: -30px;
+			display: flex;
+			width: 78%;
+			font-size: 10px;
+			font-weight: 600;
+			color: #a1a1a1;
+			letter-spacing: 1px;
+		}
+
+		.start {
+			flex: 1;
+		}
+
+		.player-audio {
+			visibility: hidden;
+		}
+
+		.blue {
+			background-color: #5c87fe;
+			color: #fff;
+		}
+
+		.blue:active {
+			box-shadow: inset -8px -8px 20px #5c87fe, inset -5px -5px 6px #5c87fe, inset 8px 8px 20px #0003, inset 5px 5px 6px #0001;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="player">
+			<h5 class="player-title">playing now</h5>
+			<div class="player-album">
+				<img src="images/music-image.jpg" alt="Album Cover" />
+			</div>
+			<h2 class="player-artist">PLAY SONG</h2>
+			<h9 class="player-song">Katrina Kaif is an Afghan Jalebi in New Phantom Song</h9>
+			<input type="range" step="any" value="0" min="0" class="player-level" id="range" />
+			<div class="audio-duration">
+				<div class="start">00:00</div>
+				<div class="end">02:09</div>
+			</div>
+			<audio class="player-audio" controls id="audio" data-condition="pause">
+				<source src="My/music.mp3" type="audio/mp3" />
+				
+			</audio>
+			<div class="player-controls">
+				<div class="player-btn" id="backward">
+					<svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 0 24 24" width="34px"
+						fill="#797d7f">
+						<path
+							d="M11 16.07V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07c-.56.4-.56 1.24 0 1.63l5.77 4.07c.67.47 1.58 0 1.58-.81zm1.66-3.25l5.77 4.07c.66.47 1.58-.01 1.58-.82V7.93c0-.81-.91-1.28-1.58-.82l-5.77 4.07c-.57.4-.57 1.24 0 1.64z" />
+					</svg>
+				</div>
+				<div class="player-btn blue" id="play">
+					<svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 0 24 24" width="34px" fill="white">
+						<path
+							d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" />
+					</svg>
+				</div>
+				<div class="player-btn" id="forward">
+					<svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 0 24 24" width="34px"
+						fill="#797d7f">
+						<path
+							d="M5.58 16.89l5.77-4.07c.56-.4.56-1.24 0-1.63L5.58 7.11C4.91 6.65 4 7.12 4 7.93v8.14c0 .81.91 1.28 1.58.82zM13 7.93v8.14c0 .81.91 1.28 1.58.82l5.77-4.07c.56-.4.56-1.24 0-1.63l-5.77-4.07c-.67-.47-1.58 0-1.58.81z" />
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var audio = document.getElementById('audio');
+		var playBtn = document.getElementById('play');
+		var forward = document.getElementById('forward');
+		var backward = document.getElementById('backward');
+		playBtn.onclick = function () {
+			if (audio.getAttribute("data-condition") == 'pause') {
+				audio.play();
+				audio.setAttribute("data-condition", "play");
+				playBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 0 24 24" width="34px" fill="white"><path d="M8 19c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2v10c0 1.1.9 2 2 2zm6-12v10c0 1.1.9 2 2 2s2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2z"/></svg>';
+				document.querySelector('.player-album img').className = 'rotate';
+			} else {
+				audio.pause();
+				audio.setAttribute("data-condition", "pause");
+				playBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 0 24 24" width="34px" fill="white"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/></svg>';
+				document.querySelector('.player-album img').className = '';
+			}
+		}
+		forward.onclick = function () {
+			audio.currentTime += 5;
+		}
+		backward.onclick = function () {
+			audio.currentTime -= 5;
+		}
+		var min = 0;
+		var sec = 0;
+		var duration = audio.duration;
+		var firstMult = duration / 60;
+		min = firstMult.toString().split('.')[0];
+		var firstMultRem = "." + firstMult.toString().split('.')[1];
+		var secndMult = Number(firstMultRem) * 60;
+		sec = secndMult.toString().split('.')[0];
+		if (sec.length < 2) {
+			sec = '0' + sec;
+		}
+		document.getElementsByClassName('end')[0].innerHTML = min + ":" + sec;
+
+		audio.ontimeupdate = function () {
+			var current = audio.currentTime;
+			var firstMult = current / 60;
+			min = firstMult.toString().split('.')[0];
+			var firstMultRem = "." + firstMult.toString().split('.')[1];
+			var secndMult = Number(firstMultRem) * 60;
+			sec = secndMult.toString().split('.')[0];
+			if (sec.length < 2) {
+				sec = '0' + sec;
+			}
+			if (sec == 'NaN') {
+				sec = '00';
+			}
+			document.getElementsByClassName('start')[0].innerHTML = min + ":" + sec;
+			document.getElementById('range').value = (audio.currentTime / audio.duration) * 100;
+		}
+		var range = document.getElementById('range');
+		range.oninput = function () {
+			if (range.value != 0) {
+				audio.currentTime = (range.value * audio.duration) / 100;
+			}
+		}
+		audio.onended = function () {
+			playBtn.click();
+			audio.currentTime = 0;
+		};
+	</script>
+</body>
+
+</html>
